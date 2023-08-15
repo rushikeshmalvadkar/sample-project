@@ -22,7 +22,11 @@ public class MovieService {
         }
     }
 
-
+    @Transaction
+    public MovieDto fetchMovieWithAop(Integer movieId , String movieName){
+        checkMovieId(movieId);
+        return new MovieDto(movieId, movieName);
+    }
 
     private static void checkMovieId(Integer movieId) {
         if (movieId < 1){
