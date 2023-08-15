@@ -23,6 +23,12 @@ public class MovieRestController {
         return ResponseEntity.ok(movieDto);
     }
 
-
+    @GetMapping("/{movieId}/{movieName}")
+    @Log
+    public ResponseEntity<MovieDto> getMovie(@PathVariable("movieId") Integer movieId ,
+                                             @PathVariable("movieName") String movieName){
+        MovieDto movieDto = this.movieService.fetchMovieWithAop(movieId , movieName);
+        return ResponseEntity.ok(movieDto);
+    }
 
 }
