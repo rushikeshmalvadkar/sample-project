@@ -18,16 +18,22 @@ public class MovieRestController {
     private final MovieService movieService;
 
     @GetMapping("/{movieId}")
-    public ResponseEntity<MovieDto> getMovie(@PathVariable("movie-id") Integer movieId){
+    public ResponseEntity<MovieDto> getMovie(@PathVariable("movie-id") Integer movieId) {
         MovieDto movieDto = this.movieService.fetchMovieByIdWithoutAop(movieId);
         return ResponseEntity.ok(movieDto);
     }
 
     @GetMapping("/{movieId}/{movieName}")
     @Log
-    public ResponseEntity<MovieDto> getMovie(@PathVariable("movieId") Integer movieId ,
-                                             @PathVariable("movieName") String movieName){
-        MovieDto movieDto = this.movieService.fetchMovieWithAop(movieId , movieName);
+    public ResponseEntity<MovieDto> getMovie(@PathVariable("movieId") Integer movieId,
+                                             @PathVariable("movieName") String movieName) {
+        /**
+         * class com.example.movie.MovieService$$SpringCGLIB$$0
+         */
+        log.info("See Movie Service Class is " +
+                 "replaced with proxy class :: {}", this.movieService.getClass()); // MovieService$$SpringCGLIB$$0
+
+        MovieDto movieDto = this.movieService.fetchMovieWithAop(movieId, movieName);
         return ResponseEntity.ok(movieDto);
     }
 
